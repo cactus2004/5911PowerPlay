@@ -8,13 +8,10 @@ public class collection {
 
     private LinearOpMode myOpMode = null;
 
-    private Servo clawRight;
-    private Servo clawLeft;
-    private Servo lusp;
-
     public collection(LinearOpMode opMode) {
 
         myOpMode = opMode;
+
 
         lusp = myOpMode.hardwareMap.get(Servo.class, "lusp");
         clawRight = myOpMode.hardwareMap.get(Servo.class, "clawRight");
@@ -25,28 +22,33 @@ public class collection {
         clawRight.setPosition(0);
         clawLeft.setPosition(0);
 
+    }
+
+    private Servo clawRight;
+    private Servo clawLeft;
+    private Servo lusp;
+
+
+
+    public void openClaw(){
+
+        clawRight.setPosition(0);
+        clawLeft.setPosition(0);
 
     }
 
-
-    public void openClaw() {
-
-        clawRight.setPosition(0.5);
-        clawLeft.setPosition(0.5);
-
-    }
-
-    public void closeClaw() {
-        clawRight.setPosition(0.5);
-        clawLeft.setPosition(0.5);
+    public void closeClaw(){
+        clawRight.setPosition(1);
+        clawLeft.setPosition(1);
     }
 
     public void setColor(String Color) {
 
-        String color[] = {"green", "red", "rainbow"};
-        double colorID[] = {0.71, 0.61, -0.99};
+        String color[] = {"green", "red", "rainbow", "blue", "purple", "dark blue", "pink", "white", "yellow"};
+        double colorID[] = {0.71, 0.67, 0.22, 0.65, 0.75, 0.73, 0.66, 0.77, 0.69};
 
         int colorIndex = Byte.MAX_VALUE;
+        double res = 0;
 
         for (int i = 0; i < color.length; i++) {
 
@@ -56,28 +58,29 @@ public class collection {
             }
         }
 
-        if (colorIndex != Byte.MAX_VALUE) {
+        if(colorIndex != Byte.MAX_VALUE){
 
-            lusp.setPosition(colorID[colorIndex]);
+            res = colorID[colorIndex];
+            lusp.setPosition(res);
 
         }
     }
 
     public void flash(String color1, String color2, ElapsedTime runTime) {
 
-       if((int)runTime.seconds() %2 == 0){
-           setColor(color1);
+        if((int)runTime.seconds() %2 != 0){
+            setColor(color1);
 
         }else{
 
-           setColor(color2);
-       }
+            setColor(color2);
+        }
 
     }
 
     public void clawTest(){
 
-        if(myOpMode.gamepad2.square) {
+        if(myOpMode.gamepad2.cross) {
 
             clawRight.setPosition(clawRight.getPosition() + 0.01);
             clawLeft.setPosition(clawLeft.getPosition() + 0.01);
@@ -88,7 +91,7 @@ public class collection {
             myOpMode.telemetry.update();
         }
 
-        else if (myOpMode.gamepad2.circle){
+        else if (myOpMode.gamepad2.triangle){
 
             clawRight.setPosition(clawRight.getPosition() - 0.01);
             clawLeft.setPosition(clawLeft.getPosition() - 0.01);
@@ -97,7 +100,6 @@ public class collection {
             myOpMode.telemetry.addData("<CL:", clawLeft.getPosition());
 
             myOpMode.telemetry.update();
-
         }
 
         else{
@@ -106,11 +108,6 @@ public class collection {
 
             myOpMode.telemetry.update();
         }
-
     }
+
 }
-
-
-
-
-
