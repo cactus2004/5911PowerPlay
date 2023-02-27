@@ -21,47 +21,47 @@ public class delivery {
         double i = 0.0;
         double d = 0.005;
 
-        liftRight = new Motor(myOpMode.hardwareMap, "liftRight", Motor.GoBILDA.RPM_435);
-        liftLeft = new Motor(myOpMode.hardwareMap, "liftLeft", Motor.GoBILDA.RPM_435);
+        liftRight = myOpMode.hardwareMap.get(DcMotorEx.class,"liftRight");
+        liftLeft = myOpMode.hardwareMap.get(DcMotorEx.class, "liftLeft");
 
-        liftRight.setInverted(false); //this might not be needed; or the left slide should be the one being reversed
-        liftLeft.setInverted(true);
+        liftRight.setDirection(DcMotorSimple.Direction.FORWARD); //this might not be needed; or the left slide should be the one being reversed
+        liftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        liftLeft.setRunMode(Motor.RunMode.RawPower);
-        liftRight.setRunMode(Motor.RunMode.RawPower);
+        liftLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        liftRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        liftRight.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-        liftLeft.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         controller = new PIDController(p, i, d);
         reset();
 
     }
 
-    private Motor liftRight;
-    private Motor liftLeft;
+    private DcMotor liftRight;
+    private DcMotor liftLeft;
 
     private PIDController controller;
 
     public void extend(double liftSpeed) {
 
-        liftRight.set(Math.abs(liftSpeed));
-        liftLeft.set(Math.abs(liftSpeed));
+        liftRight.setPower(Math.abs(liftSpeed));
+        liftLeft.setPower(Math.abs(liftSpeed));
 
     }
 
     public void retract(double slideSpeed) {
 
-        liftRight.set(-Math.abs(slideSpeed));
-        liftLeft.set(-Math.abs(slideSpeed));
+        liftRight.setPower(-Math.abs(slideSpeed));
+        liftLeft.setPower(-Math.abs(slideSpeed));
 
     }
 
 
     public void stall() {
 
-        liftRight.set(0.1);
-        liftLeft.set(0.1);
+        liftRight.setPower(0.1);
+        liftLeft.setPower(0.1);
 
     }
 
@@ -95,8 +95,8 @@ public class delivery {
 
             if (Math.abs(error) > 100) {
 
-                liftRight.set(power);
-                liftLeft.set(power);
+                liftRight.setPower(power);
+                liftLeft.setPower(power);
 
             } else {
 
@@ -114,7 +114,7 @@ public class delivery {
 
     public void reset(){
 
-        liftRight.resetEncoder();
+        liftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 }
