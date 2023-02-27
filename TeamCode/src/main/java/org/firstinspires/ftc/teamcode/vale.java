@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 //import com.qualcomm.hardware.bosch.BNO055IM77;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -18,8 +19,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 
 @TeleOp
+@Disabled
 
-public class youremom extends LinearOpMode {
+public class vale extends LinearOpMode {
 
 
     private ColorSensor colorSensor;
@@ -170,12 +172,12 @@ public class youremom extends LinearOpMode {
             } else if (gamepad1.dpad_left) {
                 claw.setPosition(0);
             }
- 
+
             /*if (gamepad2.right_bumper) {
                 intake.setPower(1);
             }else {
                 intake.setPower(0);
- 
+
             }
             if (gamepad2.right_trigger > .1) {
                 intake.setPower(-1);
@@ -201,7 +203,7 @@ public class youremom extends LinearOpMode {
                 capstone.setPosition(.62);
             } else {
                 capstone.setPosition(.97);
- 
+
 
                 if (runtime.seconds() > 80 && runtime.seconds() < 90) {
 
