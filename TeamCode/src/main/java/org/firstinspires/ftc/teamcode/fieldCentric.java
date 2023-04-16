@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+import org.firstinspires.ftc.teamcode.subsystems.LEDs;
 import org.firstinspires.ftc.teamcode.subsystems.drive;
 import org.firstinspires.ftc.teamcode.subsystems.delivery;
 import org.firstinspires.ftc.teamcode.subsystems.collection;
@@ -42,8 +43,9 @@ public class fieldCentric extends LinearOpMode {
         imu.initialize(parameters);
 
         drive drive = new drive(this);
-        collection momo = new collection(this);
+        collection claw = new collection(this);
         delivery slides = new delivery(this);
+        LEDs lusp = new LEDs(this);
 
         colorSensor = hardwareMap.colorSensor.get("colorSensor");
         colorSensor2 = hardwareMap.colorSensor.get("colorSensor2");
@@ -91,9 +93,9 @@ public class fieldCentric extends LinearOpMode {
 
 
             if (gamepad1.left_trigger > 0.1) {
-                momo.openClaw();
+                claw.openClaw();
             } else if (gamepad1.right_trigger > 0.1) {
-                momo.closeClaw();
+                claw.closeClaw();
             }
 
             if (gamepad1.cross) {
@@ -134,7 +136,7 @@ public class fieldCentric extends LinearOpMode {
 
             if (runtime.seconds() > 1 && runtime.seconds() < 11) {
 
-                momo.flash("yellow","purple", runtime);
+                lusp.flash("yellow","purple", runtime);
 
             } else {
 
@@ -142,7 +144,7 @@ public class fieldCentric extends LinearOpMode {
                 if (((DistanceSensor) colorSensor).getDistance(DistanceUnit.MM) < 35 ^
                         ((DistanceSensor) colorSensor2).getDistance(DistanceUnit.MM) < 35) {
 
-                    momo.setColor("yellow");
+                    lusp.setColor("yellow");
 
                     if (i == 0){
 
@@ -157,7 +159,7 @@ public class fieldCentric extends LinearOpMode {
                 else if (((DistanceSensor) colorSensor).getDistance(DistanceUnit.MM) < 35 &&
                         ((DistanceSensor) colorSensor2).getDistance(DistanceUnit.MM) < 35){
 
-                    momo.setColor("green");
+                    lusp.setColor("green");
                     if(i==1){
 
                         gamepad1.rumble(500);
@@ -169,7 +171,7 @@ public class fieldCentric extends LinearOpMode {
 
                 else {
 
-                    momo.setColor("pink");
+                    lusp.setColor("pink");
                     i = 0;
 
                 }

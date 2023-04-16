@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+import org.firstinspires.ftc.teamcode.subsystems.LEDs;
 import org.firstinspires.ftc.teamcode.subsystems.drive;
 import org.firstinspires.ftc.teamcode.subsystems.delivery;
 import org.firstinspires.ftc.teamcode.subsystems.collection;
@@ -24,8 +25,9 @@ public class teleopBlue extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         drive drive = new drive(this);
-        collection momo = new collection(this);
+        collection claw = new collection(this);
         delivery slides = new delivery(this);
+        LEDs lusp = new LEDs(this);
 
         colorSensor = hardwareMap.colorSensor.get("colorSensor");
         colorSensor2 = hardwareMap.colorSensor.get("colorSensor2");
@@ -64,9 +66,9 @@ public class teleopBlue extends LinearOpMode {
 
 
             if (gamepad2.left_trigger > 0.1) {
-                momo.openClaw();
+                claw.openClaw();
             } else if (gamepad2.right_trigger > 0.1) {
-                momo.closeClaw();
+                claw.closeClaw();
             }
 
             if (gamepad2.cross) {
@@ -108,7 +110,7 @@ public class teleopBlue extends LinearOpMode {
 
             if (runtime.seconds() > 80 && runtime.seconds() < 90) {
 
-                momo.flash("yellow","purple", runtime);
+                lusp.flash("yellow","purple", runtime);
 
             } else {
 
@@ -116,7 +118,7 @@ public class teleopBlue extends LinearOpMode {
                 if (((DistanceSensor) colorSensor).getDistance(DistanceUnit.MM) < 35 ^
                         ((DistanceSensor) colorSensor2).getDistance(DistanceUnit.MM) < 52) {
 
-                    momo.setColor("yellow");
+                    lusp.setColor("yellow");
 
                     if (i == 0){
 
@@ -131,7 +133,7 @@ public class teleopBlue extends LinearOpMode {
                 else if (((DistanceSensor) colorSensor).getDistance(DistanceUnit.MM) < 35 &&
                         ((DistanceSensor) colorSensor2).getDistance(DistanceUnit.MM) < 52){
 
-                    momo.setColor("green");
+                    lusp.setColor("green");
                     if(i==1){
 
                         gamepad1.rumble(500);
@@ -145,7 +147,7 @@ public class teleopBlue extends LinearOpMode {
 
                 else {
 
-                    momo.setColor("dark blue");
+                    lusp.setColor("dark blue");
                     i = 0;
 
                 }

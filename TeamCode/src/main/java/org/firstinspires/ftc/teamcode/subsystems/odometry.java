@@ -41,7 +41,6 @@ public class odometry {
     public static double getAngle(){
 
         //TODO math for angle
-
         return 0;
 
     }
