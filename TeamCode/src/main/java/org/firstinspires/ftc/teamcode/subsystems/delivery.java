@@ -9,20 +9,20 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class delivery {
 
-    private LinearOpMode myOpMode = null;
 
-    public delivery(LinearOpMode opMode) {
-        myOpMode = opMode;
+    public delivery(HardwareMap hardwareMap) {
+
 
         double p = 0.2;
         double i = 0.0;
         double d = 0.005;
 
-        liftRight = myOpMode.hardwareMap.get(DcMotorEx.class,"liftRight");
-        liftLeft = myOpMode.hardwareMap.get(DcMotorEx.class, "liftLeft");
+        liftRight = hardwareMap.get(DcMotorEx.class,"liftRight");
+        liftLeft = hardwareMap.get(DcMotorEx.class, "liftLeft");
 
         liftRight.setDirection(DcMotorSimple.Direction.FORWARD); //this might not be needed; or the left slide should be the one being reversed
         liftLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -104,10 +104,7 @@ public class delivery {
 
             }
 
-            myOpMode.telemetry.addData("error", error);
-            myOpMode.telemetry.addData("target", res);
-            myOpMode.telemetry.addData("slidePosition", slidePosition);
-            myOpMode.telemetry.update();
+
 
         }
     }

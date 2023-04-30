@@ -42,10 +42,10 @@ public class fieldCentric extends LinearOpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
-        drive drive = new drive(this);
-        collection claw = new collection(this);
-        delivery slides = new delivery(this);
-        LEDs lusp = new LEDs(this);
+        drive drive = new drive(hardwareMap);
+        collection claw = new collection(hardwareMap);
+        delivery slides = new delivery(hardwareMap);
+        LEDs lusp = new LEDs(hardwareMap);
 
         colorSensor = hardwareMap.colorSensor.get("colorSensor");
         colorSensor2 = hardwareMap.colorSensor.get("colorSensor2");

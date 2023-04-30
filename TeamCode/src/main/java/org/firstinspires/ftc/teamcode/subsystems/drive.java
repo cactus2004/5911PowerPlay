@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -30,13 +31,13 @@ public class drive {
 
     static final int         rest = 100;
 
-    public drive (LinearOpMode opmode) {
-        myOpMode = opmode;
+    public drive (HardwareMap hardwareMap) {
 
-        driveFrontRight  = myOpMode.hardwareMap.get(DcMotorEx.class, "frontRight");
-        driveBackRight = myOpMode.hardwareMap.get(DcMotorEx.class, "backRight");
-        driveFrontLeft  = myOpMode.hardwareMap.get(DcMotorEx.class, "frontLeft");
-        driveBackLeft = myOpMode.hardwareMap.get(DcMotorEx.class, "backLeft");
+
+        driveFrontRight  = hardwareMap.get(DcMotorEx.class, "frontRight");
+        driveBackRight = hardwareMap.get(DcMotorEx.class, "backRight");
+        driveFrontLeft  = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        driveBackLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
 
 
         driveFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
